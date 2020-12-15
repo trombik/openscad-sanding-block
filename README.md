@@ -4,6 +4,8 @@ A sanding block inspired by [Sanding Block](https://www.thingiverse.com/thing:23
 designed by [Lochemage](https://www.thingiverse.com/lochemage/designs).
 Customizable. The default is for small parts, which I often work on.
 
+![Image of the sanding block](assets/sanding_block.png)
+
 ## Requirements
 
 - openscad
