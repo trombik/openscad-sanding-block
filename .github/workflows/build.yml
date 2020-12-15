@@ -1,0 +1,38 @@
+---
+name: Build STL files
+on:
+  - pull_request
+  - push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Install dependencies
+        run: |
+          sudo add-apt-repository ppa:openscad/releases
+          sudo apt-get update
+          sudo apt-get install openscad freebsd-buildutils xvfb
+
+      - name: Build STL files
+
+        # XXX use xvfb-run here because OpenSCAD cannot export images
+        # without X server.
+        # https://github.com/openscad/openscad/issues/1798
+        run: |
+          xvfb-run --auto-servernum fmake
+          ls *.stl *.png
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            *.stl
+            *.png
