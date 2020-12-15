@@ -14,6 +14,15 @@ Customizable. The default is for small parts, which I often work on.
 
 ## Usage
 
+```console
+openscad --render  -o sanding_block.stl src/sanding_block.scad
+```
+
+or use [`Makefile`](Makefile).
+
+```console
+make
+```
 
 ## Tips
 
